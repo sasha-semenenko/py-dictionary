@@ -8,7 +8,7 @@ class Dictionary:
         self.current_table = [[] for _ in range(self.capacity)]
         self.taken_columns: int = 0
 
-    def __setitem__(self, key: any, value: any) -> None:
+    def __setitem__(self, key: Any, value: Any) -> None:
         index_ = hash(key) % self.capacity
         while True:
             if not self.current_table[index_]:
@@ -23,7 +23,7 @@ class Dictionary:
         if self.taken_columns > self.capacity * 2 / 3:
             self.resize()
 
-    def __getitem__(self, key: any) -> Any:
+    def __getitem__(self, key: Any) -> Any:
         index_ = hash(key) % self.capacity
         for _ in self.current_table:
             if self.current_table[index_] and \
@@ -43,4 +43,4 @@ class Dictionary:
         self.current_table = [[] for _ in range(self.capacity)]
         for items in recent_table:
             if items:
-                self.__setitem__(items[0], items[1])
+                self[items[0]] = items[1]
