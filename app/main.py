@@ -5,7 +5,7 @@ class Dictionary:
 
     def __init__(self) -> None:
         self.capacity: int = 8
-        self.current_table = [[] for _ in range(self.capacity)]
+        self.current_table: list = [[] for _ in range(self.capacity)]
         self.taken_columns: int = 0
 
     def __setitem__(self, key: Any, value: Any) -> None:
