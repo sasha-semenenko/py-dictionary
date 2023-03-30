@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Hashable
 
 
 class Dictionary:
@@ -8,11 +8,11 @@ class Dictionary:
         self.current_table: list = [[] for _ in range(self.capacity)]
         self.taken_columns: int = 0
 
-    def __setitem__(self, key: Any, value: Any) -> None:
+    def __setitem__(self, key: Hashable, value: Any) -> None:
         index_ = hash(key) % self.capacity
         while True:
             if not self.current_table[index_]:
-                self.current_table[index_] = [key, value]
+                self.current_table[index_] = [key, value, hash(key)]
                 self.taken_columns += 1
                 break
             elif self.current_table[index_][0] == key:
@@ -23,7 +23,7 @@ class Dictionary:
         if self.taken_columns > self.capacity * 2 / 3:
             self.resize()
 
-    def __getitem__(self, key: Any) -> Any:
+    def __getitem__(self, key: Hashable) -> Any:
         index_ = hash(key) % self.capacity
         for _ in self.current_table:
             if self.current_table[index_] and \
