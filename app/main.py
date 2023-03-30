@@ -24,9 +24,10 @@ class Dictionary:
             self.resize()
 
     def __getitem__(self, key: Hashable) -> Any:
+        current_hash = hash(key)
         index_ = hash(key) % self.capacity
         for _ in self.current_table:
-            if self.current_table[index_] and \
+            if self.current_table[index_][2] == current_hash and \
                     self.current_table[index_][0] == key:
                 return self.current_table[index_][1]
             else:
