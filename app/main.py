@@ -30,8 +30,7 @@ class Dictionary:
             if current_hash == self.current_table[index_][2] \
                     and key == self.current_table[index_][0]:
                 return self.current_table[index_][1]
-            else:
-                index_ = (index_ + 1) % self.capacity
+            index_ = (index_ + 1) % self.capacity
         raise KeyError(f"Key: {key} is not in dictionary")
 
     def __len__(self) -> int:
